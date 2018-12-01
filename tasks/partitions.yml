@@ -31,8 +31,7 @@
     with_items: "{{ _tmp['blockdevices'] }}"
     when: item['children'] is defined
 
-  - fail:
-      msg: "Device(s) already contain partitions: {{ _devices_used|join(', ') }}"
+  - include: wipe.yml
     when: "_devices_used|length() > 0"
 
   # This will be rather slow. I have yet to find a way to create on sgdisk command per device
@@ -71,5 +70,3 @@
   rescue:
   - set_fact:
       _role_fail: True
-
-  - include: wipe.yml
