@@ -1,7 +1,7 @@
 ---
 
 - name: umount pseudo filesystems
-  command: umount {{ _tgt_root }}/{{ item }}
+  command: umount -l {{ _tgt_root }}/{{ item }}
   with_items:
   - dev/pts
   - proc
